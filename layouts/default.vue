@@ -15,16 +15,17 @@
     <loader-screen />
   </div>
 </template>
-<script>
-export default {
-  mounted() {
-    // fake loader
-    // this.SetLoader(true);
-    // setTimeout(() => {
-    //   this.SetLoader(false);
-    // }, 1000);
-  },
-};
+<script lang="ts">
+import MainVue from '~/mixins/MainVue'
+
+export default MainVue.extend({
+  mounted () {
+    this.SetLoader(true)
+    setTimeout(() => {
+      this.SetLoader(false)
+    }, 1000)
+  }
+})
 </script>
 <style lang="scss" scoped>
 .primary {
@@ -36,7 +37,6 @@ export default {
     grid-template-rows: 100px 1fr auto;
   }
 }
-
 .template {
   height: 100%;
   min-height: 100vh;
