@@ -17,6 +17,21 @@ BigNumber.config({ EXPONENTIAL_AT: 60 })
 
 let pingTimer: any
 
+export const fetchContractData = async (method: string, abi: Array<any>, address: string, params?: Array<any>): Promise<any> => {
+  try {
+    const contract = new web3Guest.eth.Contract(abi, address)
+    return await contract.methods[method].apply(this, params).call()
+  } catch (e) {
+    console.log(e)
+    return ''
+  }
+}
+
+export const createInst = async (abi: Array<any>, address: string): Promise<any> => {
+  const abs = web4.getContractAbstraction(abi)
+  return await abs.getInstance(address)
+}
+
 export const startPingingMetamask = (callback: any): IResponse => {
   try {
     if (web3Wallet === undefined) {
@@ -68,6 +83,17 @@ export const connectNode = (): IResponse => {
   }
 }
 
+export const sendTransaction = async (method: string, abi: any[], address: string, params?: string[]): Promise<any> => {
+  const inst = new web3Wallet.eth.Contract(abi, address)
+  const data = inst.methods[method].apply(null, params).encodeABI()
+  const r = await web3Wallet.eth.sendTransaction({
+    to: address,
+    data,
+    from: userAddress
+  })
+  return r
+}
+
 export const connectWallet = async (): Promise<IResponse> => {
   try {
     // @ts-ignore
@@ -89,19 +115,28 @@ export const connectWallet = async (): Promise<IResponse> => {
     }
     web4 = new Web4()
     web4.setProvider(ethereum, userAddress)
+
+    // const r = await sendTransaction(
+    //   'transfer',
+    //   ERC20,
+    //   '0x4b107a23361770534bd1839171bbf4b0eb56485c',
+    //   [
+    //     '0xa364f66f40b8117bbdb772c13ca6a3d36fe95b13', '321'
+    //   ]
+    // )
+
+    // const inst = new web3Wallet.eth.Contract(ERC20, '0x4b107a23361770534bd1839171bbf4b0eb56485c')
+    // const data = inst.methods.approve.apply(null, ['0xa364f66f40b8117bbdb772c13ca6a3d36fe95b13', '100']).encodeABI()
+    // const r = await web3Wallet.eth.sendTransaction({
+    //   to: '0x4b107a23361770534bd1839171bbf4b0eb56485c',
+    //   data,
+    //   from: userAddress
+    // })
+    // console.log(r)
+
     return output({ userAddress })
   } catch (err) {
     return error(4001, 'connection error', err)
-  }
-}
-
-export const fetchContractData = async (method: string, abi: Array<any>, address: string, params?: Array<any>): Promise<any> => {
-  try {
-    const contract = new web3Guest.eth.Contract(abi, address)
-    return await contract.methods[method].apply(this, params).call()
-  } catch (e) {
-    console.log(e)
-    return ''
   }
 }
 
@@ -120,11 +155,6 @@ export const getFee = async (method: string, abi: Array<any>, address: string, p
     console.log(e)
     return ''
   }
-}
-
-export const createInst = async (abi: Array<any>, address: string): Promise<any> => {
-  const abs = web4.getContractAbstraction(abi)
-  return await abs.getInstance(address)
 }
 
 export const getWeb3 = (): any => web3Wallet || web3Guest
