@@ -40,7 +40,17 @@ export default {
   build: {
     transpile: [
       'vee-validate/dist/rules'
-    ]
+    ],
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ],
+    },
+    extend (config) {
+      config.node = {
+        fs: 'empty'
+      }
+    }
   },
   i18n: {
     locales: ['en'],
