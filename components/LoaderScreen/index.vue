@@ -13,16 +13,18 @@
     </div>
   </transition>
 </template>
-<script>
-import { mapGetters } from 'vuex';
+<script lang="ts">
+import { mapGetters } from 'vuex'
 
-export default {
+import MainVue from '~/mixins/MainVue'
+
+export default MainVue.extend({
   computed: {
     ...mapGetters({
-      isLoading: 'loader/getIsLoading',
-    }),
-  },
-};
+      isLoading: 'loader/getIsLoading'
+    })
+  }
+})
 </script>
 <style lang="scss" scoped>
 
@@ -47,7 +49,7 @@ export default {
     align-items: center;
   }
   &__text {
-    background: #ffffff;
+    background: #FAEEEB;
     padding: 1px 8px;
     font-weight: bold;
     font-size: 12px;
@@ -100,7 +102,7 @@ $dotsColor: #000000;
   margin: 8px;
   border-radius: 50%;
   border: 6px solid #ffffff;
-  border-color: #ffffff transparent #ffffff transparent;
+  border-color: #ffffff transparent #FAEEEB transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {

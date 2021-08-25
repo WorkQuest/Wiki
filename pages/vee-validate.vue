@@ -1,53 +1,55 @@
 <template>
-  <validation-observer v-slot="{ handleSubmit }">
-    <form
-      action=""
-      @submit.prevent="handleSubmit(click)"
+  <div class="example">
+    <h1>
+      {{ $t('i18n-example') }}
+    </h1>
+    <validation-observer
+      v-slot="{ handleSubmit }"
+      tag="div"
+      class="swap"
     >
       <validation-provider
         v-slot="{ errors }"
-        name="test value"
-        :rules="'required'"
+        tag="div"
+        name="Example field"
+        :rules="`required`"
       >
-        <input
-          v-model="value"
-          type="text"
-          @keydown.enter="onEnter($event, handleSubmit, click)"
-        >
-        <div>
-          errors: {{ errors }}
-        </div>
+        <input v-model="model.testValue" type="text">
+        <div> {{ errors }}</div>
       </validation-provider>
-      <button>
+      <button class="btn btn-primary" @click="handleSubmit(showTestModal)">
         submit
       </button>
-    </form>
-  </validation-observer>
+    </validation-observer>
+  </div>
 </template>
-<script>
+<script lang="ts">
 
-import modals from '~/store/modals/modals';
+import MainVue from '~/mixins/MainVue'
+import modals from '~/store/modals/modals'
+import { IModalOptions } from '~/store/modals/state'
 
-export default {
+export default MainVue.extend({
   data: () => ({
-    value: '',
+    model: {
+      testValue: '0'
+    }
   }),
   methods: {
-    click() {
-      this.ShowModal({
-        text: this.value,
-      });
-    },
-    onEnter(e, handler, callback) {
-      if (!e.ctrlKey) {
-        e.preventDefault();
-        handler(callback);
+    showTestModal () {
+      const payload: IModalOptions = {
+        key: modals.default,
+        title: 'Some title',
+        text: 'Some text'
       }
-    },
-  },
-};
+      this.ShowModal(payload)
+    }
+  }
+})
+
 </script>
-
 <style lang="scss" scoped>
-
+.example {
+  @include container;
+}
 </style>
