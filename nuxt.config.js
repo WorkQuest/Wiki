@@ -53,11 +53,6 @@ export default {
       }
     }
   },
-  postcss: {
-    plugins: {
-      'postcss-custom-properties': false
-    }
-  },
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',
