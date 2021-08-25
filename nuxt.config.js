@@ -43,13 +43,19 @@ export default {
     ],
     babel: {
       plugins: [
-        ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
-      ],
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
+      ]
     },
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     extend (config) {
       config.node = {
         fs: 'empty'
       }
+    }
+  },
+  postcss: {
+    plugins: {
+      'postcss-custom-properties': false
     }
   },
   i18n: {
