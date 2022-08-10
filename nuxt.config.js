@@ -32,10 +32,11 @@ export default {
   modules: [
     '@nuxtjs/style-resources',
     'bootstrap-vue/nuxt',
-    'nuxt-i18n'
+    '@nuxtjs/i18n',
   ],
   plugins: [
-    { src: '@plugins/vee-validate.ts' }
+    { src: '@plugins/vee-validate.js' },
+    { src: '@plugins/injectComponents.js' },
   ],
   build: {
     transpile: [

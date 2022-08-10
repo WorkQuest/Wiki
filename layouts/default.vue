@@ -1,51 +1,34 @@
 <template>
   <div class="primary">
-    <div class="primary__template template">
-      <div class="template__header">
-        Header
-      </div>
-      <div class="template__content">
-        <nuxt />
-      </div>
-      <div class="template__footer">
-        Footer
-      </div>
+    <Header class="template__header" />
+    <div
+      class="template__main"
+    >
+      <nuxt />
     </div>
-    <base-modal-container />
-    <loader-screen />
   </div>
 </template>
-<script lang="ts">
-import MainVue from '~/mixins/MainVue'
 
-export default MainVue.extend({
-  mounted () {
-    this.SetLoader(true)
-    setTimeout(() => {
-      this.SetLoader(false)
-    }, 1000)
-  }
-})
+<script lang="ts">
+
 </script>
+
 <style lang="scss" scoped>
 .primary {
   height: 100vh;
-  overflow-y: auto;
-  &__template {
-    height: 100%;
-    display: grid;
-    grid-template-rows: 100px 1fr auto;
-  }
+  background: $black0;
 }
+
 .template {
-  height: 100%;
-  min-height: 100vh;
-  overflow: auto;
-  &__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+  &__main {
+    display: grid;
+    padding-bottom: 80px;
+    transition: 1s;
+    width: 100%;
+
+    &_padding {
+      padding-bottom: 0;
+    }
   }
 }
 </style>
