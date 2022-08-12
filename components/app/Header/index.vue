@@ -61,10 +61,10 @@
 <script>
 import ClickOutside from 'vue-click-outside';
 import moment from 'moment';
-import { images } from '~/utils/images';
+import { images } from '@/utils/images';
 import {
   UserRole, Path,
-} from '~/utils/enums';
+} from '@/utils/enums';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -220,12 +220,7 @@ export default {
       this.closeAnother('mobile');
     },
     toMain() {
-      if (this.userData.role === UserRole.WORKER) {
-        this.$router.push(Path.QUESTS);
-      }
-      if (this.userData.role === UserRole.EMPLOYER) {
-        this.$router.push(Path.WORKERS);
-      }
+      window.location.href = 'https://app.workquest.co';
     },
     showLocale() {
       this.closeAnother('locale');
@@ -436,13 +431,6 @@ export default {
     align-items: center;
     grid-template-columns: repeat(4, auto);
     grid-gap: 25px;
-  }
-
-  &__right {
-    display: grid;
-    grid-template-columns: repeat(5, auto);
-    grid-gap: 10px;
-    align-items: center;
   }
 
   &__btn {
@@ -801,10 +789,6 @@ export default {
 
     &__left {
       grid-gap: 15px;
-    }
-
-    &__right {
-      grid-gap: 0;
     }
 
     &__btn {

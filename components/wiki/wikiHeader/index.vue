@@ -96,7 +96,7 @@
 
 <script>
 import ClickOutside from 'vue-click-outside';
-import Content from '~/components/wikiContent/content.vue';
+import Content from '~/components/wiki/wikiContent/content.vue';
 
 export default {
   name: 'wikiHeader',
@@ -228,7 +228,6 @@ export default {
 
 <style lang="scss" scoped>
 .wiki {
-  background: $black0;
   &__header {
     background: $darkblue;
     height: 350px;
@@ -406,15 +405,16 @@ export default {
       margin-left: 10px;
     }
     &__input {
-      width: 443px;
+      width: 100%;
     }
     &__content {
       width: 575px;
     }
-     &__search-field {
+    &__search-field {
+      width: 100%;
       height: 53px;
       padding: 0 10px;
-     }
+    }
   }
   .content {
     grid-template-columns: 1fr;
@@ -435,9 +435,6 @@ export default {
     &__content {
       width: 480px;
     }
-    &__input {
-      width: 354px;
-    }
   }
 }
 @include _480 {
@@ -445,18 +442,12 @@ export default {
     &__content {
       width: 380px;
     }
-    &__input {
-      width: 254px;
-    }
   }
 }
 @include _380 {
   .wiki {
     &__content {
       width: 343px;
-    }
-    &__input {
-      width: 229px;
     }
     &__search-field {
       padding: 0 4px 0 4px;

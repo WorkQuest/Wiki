@@ -1,15 +1,37 @@
 <template>
-  <div class="primary">
+  <div
+    class="primary"
+    :class="{'stop-scrolling':isShow}"
+  >
     <Header class="template__header" />
     <div
       class="template__main"
     >
       <nuxt />
     </div>
+    <Footer
+      class="template__footer"
+      @clickOnLogo="toWorkQuestWebsite"
+    />
+    <ctm-modal />
   </div>
 </template>
 
 <script lang="ts">
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters({
+      isShow: 'modals/getIsShow',
+    }),
+  },
+  methods: {
+    toWorkQuestWebsite() {
+      window.location.href = 'https://app.workquest.co';
+    },
+  },
+}
 
 </script>
 
@@ -17,6 +39,11 @@
 .primary {
   height: 100vh;
   background: $black0;
+}
+
+.stop-scrolling{
+  overflow: hidden;
+  height: 100vh;
 }
 
 .template {

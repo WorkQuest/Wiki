@@ -5,7 +5,7 @@ require('dotenv').config()
 export default {
   ssr: false,
   head: {
-    title: 'frontend-starter-kit-2',
+    title: 'WorkQuest Wiki',
     htmlAttrs: {
       lang: 'en'
     },
@@ -15,7 +15,7 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/img/favicon.svg' }
     ]
   },
   css: [
@@ -37,6 +37,7 @@ export default {
   plugins: [
     { src: '@plugins/vee-validate.js' },
     { src: '@plugins/injectComponents.js' },
+    { src: '@plugins/main.js' },
   ],
   build: {
     transpile: [

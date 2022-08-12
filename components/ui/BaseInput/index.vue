@@ -12,7 +12,15 @@
       {'ctm-field_white': mode === 'white'},
       {'ctm-field_chat': mode === 'chat'},
     ]"
+    :rules="rules"
+    :name="name"
   >
+    <div
+      v-if="label !== ''"
+      :class="[{'ctm-field__header' : !tip}, {'ctm-field__header ctm-field__header_mar5' : tip}]"
+    >
+      {{ label }}
+    </div>
     <div class="ctm-field__body">
       <span
         v-if="isSearch"
@@ -85,12 +93,21 @@ export default {
       type: Function,
       default: () => {},
     },
+    tip: {
+      type: String,
+      default: '',
+    },
     value: {
       type: [String, Number],
       default: '',
     },
     mode: {
       type: String,
+      default: '',
+    },
+    name: {
+      type: String,
+      description: 'Input name (used for validation)',
       default: '',
     },
     big: {
@@ -125,6 +142,11 @@ export default {
       type: String,
       default: 'NON_SELECTOR',
       required: true,
+    },
+    rules: {
+      type: [String, Array, Object],
+      description: 'Vee validate validation rules',
+      default: '',
     },
   },
   computed: {

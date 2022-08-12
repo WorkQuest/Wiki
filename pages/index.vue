@@ -6,7 +6,7 @@
 
 <script lang="ts">
 
-import WikiHeader from '~/components/wikiHeader/index.vue';
+import WikiHeader from '~/components/wiki/wikiHeader/index.vue';
 
 export default {
   components: {
