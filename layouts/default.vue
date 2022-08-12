@@ -48,6 +48,7 @@ export default {
 
 .template {
   &__main {
+    background-color: inherit;
     display: grid;
     padding-bottom: 80px;
     transition: 1s;

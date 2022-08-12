@@ -180,7 +180,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import modals from '@/store/modals/modals';
-import {URLS, LEGAL_INFO, COMPANY, SERVICES, DeFi} from '@/utils/footer';
+import { URLS, LEGAL_INFO, COMPANY, SERVICES, DeFi } from '@/utils/footer';
 
 export default {
   name: 'Footer',
@@ -257,8 +257,10 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
 .footer {
+  background-color: inherit;
   width: 100%;
   display: flex;
   justify-content: center;
