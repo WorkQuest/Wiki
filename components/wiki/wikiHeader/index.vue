@@ -41,13 +41,6 @@
                 </a>
               </div>
             </div>
-            <div class="wiki__button-field">
-              <base-btn
-                class="wiki__search-button"
-                data-selector="SEARCH-BTN"
-                :text="$t('wiki.search')"
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -191,21 +184,21 @@ export default {
         // eslint-disable-next-line no-restricted-syntax
         for (const card of data[nav].cardKeys) {
           const { cardTitle, cardSubtitle } = data[nav].cards[card];
-          if (cardSubtitle.indexOf(word) !== -1) {
-            if (results.filter((item) => item.text === cardSubtitle).length === 0) {
-              results.push({
-                tab: nav,
-                tabName: data[nav].tabName,
-                text: `${data[nav].cards[card].title} - ${data[nav].cards[card].subtitle}`,
-                id: cardTitle,
-              });
-            }
-          } else if (cardTitle.indexOf(word) !== -1) {
+          if (data[nav].title.indexOf(word) !== -1 || cardTitle.indexOf(word) !== -1) {
             if (results.filter((item) => item.text === cardTitle).length === 0) {
               results.push({
                 tab: nav,
                 tabName: data[nav].tabName,
                 text: data[nav].cards[card].title,
+                id: cardTitle,
+              });
+            }
+          } else if (cardSubtitle.indexOf(word) !== -1) {
+            if (results.filter((item) => item.text === cardSubtitle).length === 0) {
+              results.push({
+                tab: nav,
+                tabName: data[nav].tabName,
+                text: `${data[nav].cards[card].title} - ${data[nav].cards[card].subtitle}`,
                 id: cardTitle,
               });
             }
@@ -261,12 +254,11 @@ export default {
     align-items: center;
     padding: 0 20px;
     border-radius: 6px;
+    width: 100%;
   }
   &__search-holder {
     position: relative;
-  }
-  &__input {
-    width: 880px;
+    width: 100%;
   }
   &__button-field {
     height: 100%;
@@ -331,18 +323,12 @@ export default {
     &__content {
     width: 950px;
     }
-    &__input {
-    width: 650px;
-    }
   }
 }
 @include _991 {
   .wiki {
     &__content {
       width: 750px;
-    }
-    &__input {
-      width: 450px;
     }
   }
 }
@@ -410,9 +396,6 @@ export default {
       width: 86px;
       height: 37px;
       margin-left: 10px;
-    }
-    &__input {
-      width: 100%;
     }
     &__content {
       width: 575px;

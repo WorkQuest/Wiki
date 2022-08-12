@@ -15,7 +15,9 @@
             :src="$options.images.WQ_LOGO"
             alt="WorkQuest"
           >
-          <span class="header__text">WorkQuest</span>
+          <span class="header__text">
+            {{ $t('wiki.title') }}
+          </span>
         </div>
       </div>
       <div class="header__right">
