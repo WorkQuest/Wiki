@@ -1,0 +1,54 @@
+<template>
+  <div class="ctm-modal__box">
+    <div
+      v-if="isHeader"
+      class="ctm-modal__header"
+    >
+      <div class="ctm-modal__title">
+        {{ title || options.title || 'Default' }}
+      </div>
+      <button
+        class="ctm-modal__x"
+        @click="close()"
+      >
+        <img
+          src="~assets/img/close.svg"
+          alt="x"
+        >
+      </button>
+    </div>
+    <slot />
+  </div>
+</template>
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+  name: 'ModalBox',
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+    isHeader: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  computed: {
+    ...mapGetters({
+      options: 'modals/getOptions',
+    }),
+  },
+  methods: {
+    close() {
+      this.$store.dispatch('modals/hide');
+    },
+  },
+};
+</script>
+<style lang="scss" scoped>
+.ctm-modal {
+  @include modalKit;
+}
+</style>
