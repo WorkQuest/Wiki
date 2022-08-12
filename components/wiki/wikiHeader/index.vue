@@ -228,6 +228,7 @@ export default {
 
 <style lang="scss" scoped>
 .wiki {
+  background: $black0;
   &__header {
     background: $darkblue;
     height: 350px;
@@ -300,6 +301,12 @@ export default {
     &:hover {
       background: #E9EDF2;
       transition: 300ms;
+      &:first-child {
+        border-radius: 6px 6px 0 0;
+      }
+      &:last-child {
+        border-radius: 0 0 6px 6px;
+      }
     }
     &_active {
       font-weight: 600;
