@@ -440,18 +440,8 @@ export default {
     }
   }
 }
-//@include _480 {
-//  .wiki {
-//    &__content {
-//      width: 380px;
-//    }
-//  }
-//}
 @include _380 {
   .wiki {
-    //&__content {
-    //  width: 343px;
-    //}
     &__search-field {
       padding: 0 4px 0 4px;
     }
