@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-
 import WikiHeader from '~/components/wiki/wikiHeader/index.vue';
 
 export default {
+  name: 'Index',
   components: {
     WikiHeader
   },

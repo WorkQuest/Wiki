@@ -35,7 +35,7 @@
                   :key="index"
                   class="searched__item"
                   :href="item.id ? '#' + item.id : ''"
-                  @click="gotoTab(item.tab)"
+                  @click="gotoTab(item)"
                 >
                   <span class="searched__item_nav">{{ item.tabName }}</span> - {{ item.text }}
                 </a>
@@ -170,8 +170,11 @@ export default {
       }
       this.interval = setTimeout(() => this.searchData(), 250);
     },
-    gotoTab(tab) {
-      this.currentTab = tab;
+    gotoTab(item) {
+      if (item.tabName === 'Nothing found') {
+        return;
+      }
+      this.currentTab = item.tab;
       this.searched = [];
       this.isMoving = true;
     },
@@ -184,16 +187,7 @@ export default {
         // eslint-disable-next-line no-restricted-syntax
         for (const card of data[nav].cardKeys) {
           const { cardTitle, cardSubtitle } = data[nav].cards[card];
-          if (data[nav].title.indexOf(word) !== -1 || cardTitle.indexOf(word) !== -1) {
-            if (results.filter((item) => item.text === cardTitle).length === 0) {
-              results.push({
-                tab: nav,
-                tabName: data[nav].tabName,
-                text: data[nav].cards[card].title,
-                id: cardTitle,
-              });
-            }
-          } else if (cardSubtitle.indexOf(word) !== -1) {
+          if (data[nav].title.indexOf(word) !== -1 || cardSubtitle.indexOf(word) !== -1) {
             if (results.filter((item) => item.text === cardSubtitle).length === 0) {
               results.push({
                 tab: nav,
@@ -202,16 +196,24 @@ export default {
                 id: cardTitle,
               });
             }
-          } else if (data[nav].title.indexOf(word) !== -1) {
-            if (results.filter((item) => item.text === data[nav].title).length === 0) {
+          } else if (cardTitle.indexOf(word) !== -1) {
+            if (results.filter((item) => item.text === cardTitle).length === 0) {
               results.push({
                 tab: nav,
                 tabName: data[nav].tabName,
-                text: data[nav].title,
+                text: data[nav].cards[card].title,
+                id: cardTitle,
               });
             }
           }
         }
+      }
+      if(!results.length) {
+        results.push({
+          tabName: this.$t('ui.nothing'),
+          text: this.$t('ui.tryAgain'),
+          id: 999,
+        });
       }
       this.searched = results;
     },

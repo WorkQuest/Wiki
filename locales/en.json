@@ -44,7 +44,9 @@
     },
     "footer": {
       "rights": "All rights reserved"
-    }
+    },
+    "nothing": "Nothing found",
+    "tryAgain": "Please, try again"
   },
   "footer": {
     "download": "Download Mobile App",
