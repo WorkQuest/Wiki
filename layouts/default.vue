@@ -37,7 +37,7 @@ export default {
 
 <style lang="scss" scoped>
 .primary {
-  height: 100vh;
+  height: 100%;
   background: $black0;
 }
 

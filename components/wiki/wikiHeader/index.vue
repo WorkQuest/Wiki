@@ -35,18 +35,11 @@
                   :key="index"
                   class="searched__item"
                   :href="item.id ? '#' + item.id : ''"
-                  @click="gotoTab(item.tab)"
+                  @click="gotoTab(item)"
                 >
                   <span class="searched__item_nav">{{ item.tabName }}</span> - {{ item.text }}
                 </a>
               </div>
-            </div>
-            <div class="wiki__button-field">
-              <base-btn
-                class="wiki__search-button"
-                data-selector="SEARCH-BTN"
-                :text="$t('wiki.search')"
-              />
             </div>
           </div>
         </div>
@@ -177,8 +170,11 @@ export default {
       }
       this.interval = setTimeout(() => this.searchData(), 250);
     },
-    gotoTab(tab) {
-      this.currentTab = tab;
+    gotoTab(item) {
+      if (item.tabName === 'Nothing found') {
+        return;
+      }
+      this.currentTab = item.tab;
       this.searched = [];
       this.isMoving = true;
     },
@@ -191,7 +187,7 @@ export default {
         // eslint-disable-next-line no-restricted-syntax
         for (const card of data[nav].cardKeys) {
           const { cardTitle, cardSubtitle } = data[nav].cards[card];
-          if (cardSubtitle.indexOf(word) !== -1) {
+          if (data[nav].title.indexOf(word) !== -1 || cardSubtitle.indexOf(word) !== -1) {
             if (results.filter((item) => item.text === cardSubtitle).length === 0) {
               results.push({
                 tab: nav,
@@ -209,16 +205,15 @@ export default {
                 id: cardTitle,
               });
             }
-          } else if (data[nav].title.indexOf(word) !== -1) {
-            if (results.filter((item) => item.text === data[nav].title).length === 0) {
-              results.push({
-                tab: nav,
-                tabName: data[nav].tabName,
-                text: data[nav].title,
-              });
-            }
           }
         }
+      }
+      if(!results.length) {
+        results.push({
+          tabName: this.$t('ui.nothing'),
+          text: this.$t('ui.tryAgain'),
+          id: 999,
+        });
       }
       this.searched = results;
     },
@@ -261,12 +256,11 @@ export default {
     align-items: center;
     padding: 0 20px;
     border-radius: 6px;
+    width: 100%;
   }
   &__search-holder {
     position: relative;
-  }
-  &__input {
-    width: 880px;
+    width: 100%;
   }
   &__button-field {
     height: 100%;
@@ -331,18 +325,12 @@ export default {
     &__content {
     width: 950px;
     }
-    &__input {
-    width: 650px;
-    }
   }
 }
 @include _991 {
   .wiki {
     &__content {
       width: 750px;
-    }
-    &__input {
-      width: 450px;
     }
   }
 }
@@ -410,9 +398,6 @@ export default {
       width: 86px;
       height: 37px;
       margin-left: 10px;
-    }
-    &__input {
-      width: 100%;
     }
     &__content {
       width: 575px;
