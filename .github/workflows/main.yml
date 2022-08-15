@@ -28,12 +28,12 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.2.11
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY_MAIN }}
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST_MAIN }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER_MAIN }}
-          TARGET: ${{ secrets.REMOTE_TARGET_MAIN }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
 
   deploy-develop:
     if: github.ref == 'refs/heads/develop'
@@ -58,9 +58,9 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.2.11
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY_DEV }}
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST_DEV }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER_DEV }}
-          TARGET: ${{ secrets.REMOTE_TARGET_DEV }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
