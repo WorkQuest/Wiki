@@ -175,6 +175,7 @@ export default {
         return;
       }
       this.currentTab = item.tab;
+      this.searchValue = '';
       this.searched = [];
       this.isMoving = true;
     },
@@ -343,6 +344,7 @@ export default {
     &__header {
       height: 230px;
       margin-bottom: 0;
+      padding: 0 10px;
     }
     &__navigation {
       position: sticky;
@@ -389,6 +391,12 @@ export default {
       }
       &:hover {
         background: $blue;
+        &:first-child {
+          border-radius: 6px;
+        }
+        &:last-child {
+          border-radius: 6px;
+        }
       }
     }
     &__button-field {
@@ -413,34 +421,27 @@ export default {
   }
   .navigation {
     &__desktop {
-    display: none;
+      display: none;
     }
-  &__mobile {
-    display: block;
-    margin-bottom: 15px;
-    z-index: 1;
+    &__mobile {
+      display: block;
+      margin-bottom: 15px;
+      z-index: 1;
+    }
   }
-}
+  .main {
+    padding: 10px 10px 0 10px;
+  }
 }
 @include _575 {
   .wiki {
     &__content {
-      width: 480px;
-    }
-  }
-}
-@include _480 {
-  .wiki {
-    &__content {
-      width: 380px;
+      width: 100%;
     }
   }
 }
 @include _380 {
   .wiki {
-    &__content {
-      width: 343px;
-    }
     &__search-field {
       padding: 0 4px 0 4px;
     }

@@ -59,4 +59,8 @@ export default {
     }
   }
 }
+
+@include _350 {
+  max-width: 320px;
+}
 </style>
